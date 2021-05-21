@@ -22,11 +22,27 @@ class AdicionarUsuario extends Component {
 
   onSubmitHandler(event) {
     event.preventDefault()
-    const id = Math.floor(Math.random() * 1000)
-    const usuario = { ...this.state.usuario, id }
 
-    this.setState({ usuario: { nome: '', sobrenome: '', email: '' } })
-    this.props.adicionarUsuario(usuario)
+    const usuario = this.state.usuario
+
+    fetch('https://reqres.in/api/users', {
+      method:'POST', //method default é get
+      header:{'Content-Type': 'application/json'}, //informar o tipo de dado
+      body: JSON.stringify(usuario) //usuario é um objeto javascript, esta função o converte para JSON
+    })
+      .then(resposta => resposta.json())
+      .then(dados => {
+        console.log(dados)
+
+        //BUGFIX: no tutorial não tem esse passo... não sei se a API mudou para não responder com uma cópia do objeto + id e sim só com o id ou se eu errei alguma coisa
+        //dados = {...dados, nome: usuario.nome, sobrenome: usuario.sobrenome, email: usuario.email}
+        dados.nome = usuario.nome
+        dados.sobrenome = usuario.sobrenome
+        dados.email = usuario.email
+
+        this.setState({usuario: {nome: '', sobrenome: '', email: ''}}) //limpa o formulário
+        this.props.adicionarUsuario(dados) //adiciona o usuário em Usuarios.js (a função adicionar dispara o setState)
+      })
   }
 
   render() {
