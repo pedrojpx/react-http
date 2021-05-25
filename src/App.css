@@ -1,4 +1,4 @@
-.App {
+.App main {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -29,4 +29,41 @@
   .App {
     max-width: 1140px;
   }
+}
+
+.App nav {
+  padding: 0;
+  background-color: #FFEBF3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .14);
+}
+
+.App nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.App nav ul li {
+  display: block;
+
+}
+
+.App nav ul li a {
+  display: block;
+  padding: 1rem;
+  color: #DA3C78;
+  text-decoration: none;
+}
+
+.App nav ul li a:hover {
+  background-color: #ffbcd8;
+}
+
+/*é a classe adicionada pelo NavLink para colorir o botão selecionado*/
+.App nav ul li a.active {
+  background-color: #ff6ca8;
+  color: #FFf;
 }
