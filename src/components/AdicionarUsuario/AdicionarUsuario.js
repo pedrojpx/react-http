@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './AdicionarUsuario.css'
 
-function AdicionarUsuario(props) {
+function AdicionarUsuario() {
   const [nome/*variável de acesso a esse atributo do state */, setNome /*função(dispatch) de atualização*/] = useState(''/*valor inicial*/)
   const [sobrenome, setSobrenome] = useState('')
   const [email, setEmail] = useState('')
@@ -18,18 +18,15 @@ function AdicionarUsuario(props) {
       header:{'Content-Type': 'application/json'}, //informar o tipo de dado
       body: JSON.stringify(usuario) //usuario é um objeto javascript, esta função o converte para JSON
     })
-      .then(resposta => resposta.json())
-      .then(dados => {
-        console.log(dados)
-
-        //BUGFIX: no tutorial não tem esse passo... não sei se a API mudou para não responder com uma cópia do objeto + id e sim só com o id ou se eu errei alguma coisa
-        //dados = {...dados, nome: usuario.nome, sobrenome: usuario.sobrenome, email: usuario.email}
-        dados.nome = usuario.nome
-        dados.sobrenome = usuario.sobrenome
-        dados.email = usuario.email
-
-        clearFields() 
-        props.adicionarUsuario(dados) //adiciona o usuário em Usuarios.js (a função adicionar dispara o setState)
+    // Não precisa da parte de pegar dados da resposta pois os dados não 
+    // são renderizados mais neste componente
+      .then(resposta => {
+        if (resposta.ok) {
+          clearFields()
+          alert('Usuário cadastrado com sucesso!')
+        } else {
+          alert('Houve algum erro no cadastramento do usuário')
+        }
       })
   }
 

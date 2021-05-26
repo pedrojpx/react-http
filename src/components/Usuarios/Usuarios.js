@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import AdicionarUsuario from '../AdicionarUsuario/AdicionarUsuario'
 import Usuario from '../Usuario/Usuario'
 
 function Usuarios() {
@@ -9,7 +8,7 @@ function Usuarios() {
 
   useEffect(() => {
     console.log("Use effect...")
-    const resposta = fetch('https://reqres.in/api/users')
+    fetch('https://reqres.in/api/users')
       .then(resposta => resposta.json())
       .then(dados => {
         const usuarios = dados.data.map(usuario => ({

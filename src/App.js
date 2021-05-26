@@ -6,6 +6,7 @@ import Usuarios from './components/Usuarios/Usuarios'
 import AdicionarUsuario from './components/AdicionarUsuario/AdicionarUsuario'
 import Home from './components/Home/Home'
 import PaginaNaoEncontrada from './components/PageNotFound/PageNotFound'
+import DetalhesUsuario from './components/Detalhes/DetalhesUsuario'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             colocar a "/" como última, de forma que as outras tenham prioridade ou 
             colocar o atributo exact depois do "/"*/}
             <Route path="/" exact><Home /></Route>
+            <Route path="/usuarios/:codigo" ><DetalhesUsuario /></Route>
             <Route path="/usuarios" ><Usuarios /></Route>
             <Route path="/adicionar" ><AdicionarUsuario /></Route>
             <Route path="*"><PaginaNaoEncontrada /></Route>
